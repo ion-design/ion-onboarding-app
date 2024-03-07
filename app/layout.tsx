@@ -18,8 +18,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				className={
-					inter.className +
-					'w-screen h-screen bg-base overflow-y-scroll flex items-center justify-center'
+					inter.className + 'w-screen h-screen bg-base overflow-y-scroll flex justify-center'
 				}
 			>
 				{children}
