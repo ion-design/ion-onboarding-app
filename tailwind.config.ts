@@ -1,215 +1,413 @@
-import type { Config } from "tailwindcss";
-const config: Config = {
-  darkMode: ["class"],
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-      colors: {
-        tremor: {
-          brand: {
-            faint: "var(--primary-lightest)",
-            muted: "var(--primary-lighter)",
-            subtle: "var(--primary-light)",
-            DEFAULT: "var(--primary-base)",
-            emphasis: "var(--primary-dark)",
-            inverted: "var(--primary-foreground)",
-          },
-          background: {
-            muted: "var(--weak)",
-            subtle: "var(--soft)",
-            DEFAULT: "var(--background)",
-            emphasis: "var(--sub)",
-          },
-          border: {
-            DEFAULT: "var(--sub-stroke)",
-          },
-          ring: {
-            DEFAULT: "var(--primary-base)",
-          },
-          content: {
-            subtle: "var(--weak-foreground)",
-            DEFAULT: "var(--soft-foreground)",
-            emphasis: "var(--sub-foreground)",
-            strong: "var(--foreground)",
-            inverted: "var(--background)",
-          },
-        },
-        "gradients/primary/base": "#3b76f6",
-        "gradients/secondary/base": "#667a91",
-        primary: {
-          focus: "var(--primary-focus)",
-          darkest: "var(--primary-darkest)",
-          foreground: "var(--primary-foreground)",
-          darker: "var(--primary-darker)",
-          dark: "var(--primary-dark)",
-          DEFAULT: "var(--primary-base)",
-          light: "var(--primary-light)",
-          lighter: "var(--primary-lighter)",
-          lightest: "var(--primary-lightest)",
-        },
-        secondary: {
-          focus: "var(--secondary-focus)",
-          darkest: "var(--secondary-darkest)",
-          foreground: "var(--secondary-foreground)",
-          darker: "var(--secondary-darker)",
-          dark: "var(--secondary-dark)",
-          DEFAULT: "var(--secondary-base)",
-          light: "var(--secondary-light)",
-          lighter: "var(--secondary-lighter)",
-          lightest: "var(--secondary-lightest)",
-        },
-        danger: {
-          focus: "var(--danger-focus)",
-          darkest: "var(--danger-darkest)",
-          foreground: "var(--danger-foreground)",
-          darker: "var(--danger-darker)",
-          dark: "var(--danger-dark)",
-          DEFAULT: "var(--danger-base)",
-          light: "var(--danger-light)",
-          lighter: "var(--danger-lighter)",
-          lightest: "var(--danger-lightest)",
-        },
-        state: {
-          success: "var(--state-success)",
-          foreground: "var(--state-foreground)",
-          warning: "var(--state-warning)",
-          error: "var(--state-error)",
-          information: "var(--state-information)",
-          away: "var(--state-away)",
-          feature: "var(--state-feature)",
-          neutral: "var(--state-neutral)",
-          verified: "var(--state-verified)",
-        },
-        soft: {
-          DEFAULT: "var(--soft)",
-          foreground: "var(--soft-foreground)",
-          stroke: "var(--soft-stroke)",
-        },
-        weak: {
-          DEFAULT: "var(--weak)",
-          foreground: "var(--weak-foreground)",
-          stroke: "var(--weak-stroke)",
-        },
-        sub: {
-          DEFAULT: "var(--sub)",
-          foreground: "var(--sub-foreground)",
-          stroke: "var(--sub-stroke)",
-        },
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-      fontSize: {
-        "tremor-label": [
-          "0.75rem",
-          {
-            lineHeight: "1rem",
-          },
-        ],
-        "tremor-default": [
-          "0.875rem",
-          {
-            lineHeight: "1.25rem",
-          },
-        ],
-        "tremor-title": [
-          "1.125rem",
-          {
-            lineHeight: "1.75rem",
-          },
-        ],
-        "tremor-metric": [
-          "1.875rem",
-          {
-            lineHeight: "2.25rem",
-          },
-        ],
-      },
-      borderRadius: {
-        "radius-none": "var(--radius-none)",
-        "radius-xs": "var(--radius-xs)",
-        "radius-sm": "var(--radius-sm)",
-        radius: "var(--radius-base)",
-        "radius-md": "var(--radius-md)",
-        "radius-lg": "var(--radius-lg)",
-        "radius-full": "var(--radius-full)",
-      },
-      boxShadow: {
-        shadow:
-          "0px 2px 4px 0px rgba(0, 0, 0, 0.03), 0px 6px 6px 0px rgba(0, 0, 0, 0.03),0px 15px 20px 0px rgba(0, 0, 0, 0.03), 0px 30px 40px 0px rgba(0, 0, 0, 0.03),0px 40px 70px 0px rgba(0, 0, 0, 0.03), 0px 4px 30px 0px rgba(0, 0, 0, 0.03), 0px 0px 8px 0px rgba(0, 0, 0, 0.03)",
-      },
-    },
-  },
-  plugins: [require("tailwindcss-animate")],
-  safelist: [
-    ...["primary", "secondary", "danger"].flatMap((customColor) => [
-      ...[
-        "lightest",
-        "lighter",
-        "light",
-        "",
-        "dark",
-        "darker",
-        "darkest",
-      ].flatMap((shade) => [
-        `bg-${customColor}${shade ? `-${shade}` : ""}`,
-        `border-${customColor}${shade ? `-${shade}` : ""}`,
-        `hover:bg-${customColor}${shade ? `-${shade}` : ""}`,
-        `hover:border-${customColor}${shade ? `-${shade}` : ""}`,
-        `hover:text-${customColor}${shade ? `-${shade}` : ""}`,
-        `active:bg-${customColor}${shade ? `-${shade}` : ""}`,
-        `active:border-${customColor}${shade ? `-${shade}` : ""}`,
-        `active:text-${customColor}${shade ? `-${shade}` : ""}`,
-        `fill-${customColor}${shade ? `-${shade}` : ""}`,
-        `ring-${customColor}${shade ? `-${shade}` : ""}`,
-        `stroke-${customColor}${shade ? `-${shade}` : ""}`,
-        `text-${customColor}${shade ? `-${shade}` : ""}`,
-        `text-${customColor}-foreground`,
-      ]),
-      `fill-${customColor}`,
-      `ring-${customColor}`,
-      `stroke-${customColor}`,
-      `text-${customColor}`,
-      `ui-selected:bg-${customColor}`,
-      `ui-selected:border-${customColor}`,
-      `ui-selected:text-${customColor}`,
-    ]),
-    {
-      pattern:
-        /^(bg-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ["hover", "ui-selected"],
-    },
-    {
-      pattern:
-        /^(text-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ["hover", "ui-selected"],
-    },
-    {
-      pattern:
-        /^(border-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-      variants: ["hover", "ui-selected"],
-    },
-    {
-      pattern:
-        /^(ring-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-    },
-    {
-      pattern:
-        /^(stroke-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-    },
-    {
-      pattern:
-        /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-    },
-  ],
+// eslint-disable-next-line
+const colors = require('tailwindcss/colors');
+module.exports = {
+	content: ['./src/**/**/*.{ts,tsx}', './node_modules/@tremor/**/*.{js,ts,jsx,tsx}'],
+	darkMode: 'class',
+	theme: {
+		extend: {
+			fontFamily: {
+				headers: ['var(--font-inter)'],
+				sans: ['var(--font-inter)', 'ui-sans-serif'],
+			},
+			colors: {
+				container: {
+					DEFAULT: 'var(--container)',
+					high: 'var(--container-high)',
+				},
+				inverse: {
+					DEFAULT: 'var(--inverse)',
+				},
+				text: {
+					sub: 'var(--text-sub)',
+					soft: 'var(--text-soft)',
+					disabled: 'var(--text-disabled)',
+					inverse: 'var(--text-inverse)',
+				},
+				outline: {
+					DEFAULT: 'var(--outline)',
+					sub: 'var(--outline-sub)',
+					disabled: 'var(--outline-disabled)',
+					inverse: 'var(--outline-inverse)',
+				},
+				primary: {
+					accent: 'var(--primary-accent)',
+					container: 'var(--primary-container)',
+					sub: 'var(--primary-sub)',
+					DEFAULT: 'var(--primary)',
+					hover: 'var(--primary-hover)',
+					pressed: 'var(--primary-pressed)',
+				},
+				on: {
+					inverse: 'var(--on-inverse)',
+					disabled: 'var(--on-disabled)',
+					primary: 'var(--on-primary)',
+					'primary-container': 'var(--on-primary-container)',
+					'primary-hover': 'var(--on-primary-hover)',
+					'primary-pressed': 'var(--on-primary-pressed)',
+					neutral: 'var(--on-neutral)',
+					'neutral-container': 'var(--on-neutral-container)',
+					'neutral-hover': 'var(--on-neutral-hover)',
+					'neutral-pressed': 'var(--on-neutral-pressed)',
+					success: 'var(--on-success)',
+					'success-container': 'var(--on-success-container)',
+					'success-hover': 'var(--on-success-hover)',
+					'success-pressed': 'var(--on-success-pressed)',
+					warning: 'var(--on-warning)',
+					'warning-container': 'var(--on-warning-container)',
+					'warning-hover': 'var(--on-warning-hover)',
+					'warning-pressed': 'var(--on-warning-pressed)',
+					danger: 'var(--on-danger)',
+					'danger-container': 'var(--on-danger-container)',
+					'danger-hover': 'var(--on-danger-hover)',
+					'danger-pressed': 'var(--on-danger-pressed)',
+					info: 'var(--on-info)',
+					'info-container': 'var(--on-info-container)',
+					'info-hover': 'var(--on-info-hover)',
+					'info-pressed': 'var(--on-info-pressed)',
+				},
+				neutral: {
+					accent: 'var(--neutral-accent)',
+					container: 'var(--neutral-container)',
+					sub: 'var(--neutral-sub)',
+					DEFAULT: 'var(--neutral)',
+					hover: 'var(--neutral-hover)',
+					pressed: 'var(--neutral-pressed)',
+				},
+				success: {
+					accent: 'var(--success-accent)',
+					container: 'var(--success-container)',
+					sub: 'var(--success-sub)',
+					DEFAULT: 'var(--success)',
+					hover: 'var(--success-hover)',
+					pressed: 'var(--success-pressed)',
+				},
+				warning: {
+					accent: 'var(--warning-accent)',
+					container: 'var(--warning-container)',
+					sub: 'var(--warning-sub)',
+					DEFAULT: 'var(--warning)',
+					hover: 'var(--warning-hover)',
+					pressed: 'var(--warning-pressed)',
+				},
+				danger: {
+					accent: 'var(--danger-accent)',
+					container: 'var(--danger-container)',
+					sub: 'var(--danger-sub)',
+					DEFAULT: 'var(--danger)',
+					hover: 'var(--danger-hover)',
+					pressed: 'var(--danger-pressed)',
+				},
+				info: {
+					accent: 'var(--info-accent)',
+					container: 'var(--info-container)',
+					sub: 'var(--info-sub)',
+					DEFAULT: 'var(--info)',
+					hover: 'var(--info-hover)',
+					pressed: 'var(--info-pressed)',
+				},
+				foreground: 'var(--foreground)',
+				background: 'var(--background)',
+				soft: 'var(--soft)',
+				sub: 'var(--sub)',
+				weak: 'var(--weak)',
+				'outline-sub': 'var(--outline-sub)',
+				disabled: 'var(--disabled)',
+				'on-disabled': 'var(--on-disabled)',
+				tremor: {
+					brand: {
+						faint: 'var(--primary-accent)',
+						muted: 'var(--primary-container)',
+						subtle: 'var(--primary-sub)',
+						DEFAULT: 'var(--primary)',
+						emphasis: 'var(--primary-pressed)',
+						inverted: 'var(--on-primary)',
+					},
+					background: {
+						muted: 'var(--disabled)',
+						subtle: 'var(--container)',
+						DEFAULT: 'var(--background)',
+						emphasis: 'var(--container-high)',
+					},
+					border: {
+						DEFAULT: 'var(--outline-sub)',
+					},
+					ring: {
+						DEFAULT: 'var(--primary)',
+					},
+					content: {
+						subtle: 'var(--on-disabled)',
+						DEFAULT: 'var(--soft)',
+						emphasis: 'var(--sub)',
+						strong: 'var(--foreground)',
+						inverted: 'var(--background)',
+					},
+				},
+				'Surface/Overlay': 'white',
+				'Content/Secondary': '#8188a0',
+				'Actions/Selected': '#f0f2f6',
+				'Content/Primary': '#09111c',
+				'Surface/Stroke': '#e7e8ee',
+				'Accent/Main': '#3d6ae8',
+				'Surface/Alternative': '#f0f2f6',
+				'Surface/Base': '#fbfcfe',
+				'Content/Tertiary': '#c0c5cf',
+				'Actions/Hover': '#f6f7f9',
+				'Accent/Hover': '#3760d3',
+				'State/Error/Hover': '#ff5b5b',
+			},
+			boxShadow: {
+				low: '0px 1px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 2px 0px rgba(0, 0, 0, 0.08),0px 2px 2px 0px rgba(0, 0, 0, 0.1), 0px 0px 8px 0px rgba(0, 0, 0, 0.05);',
+				medium:
+					'0px 1px 1px 0px rgba(0, 0, 0, 0.05), 0px 2px 2px 0px rgba(0, 0, 0, 0.05),0px 5px 5px 0px rgba(0, 0, 0, 0.05), 0px 10px 10px 0px rgba(0, 0, 0, 0.05), 0px 0px 8px 0px rgba(0, 0, 0, 0.05)',
+				high: '0px 2px 4px 0px rgba(0, 0, 0, 0.03), 0px 6px 6px 0px rgba(0, 0, 0, 0.03),0px 15px 20px 0px rgba(0, 0, 0, 0.03), 0px 30px 40px 0px rgba(0, 0, 0, 0.03),0px 40px 70px 0px rgba(0, 0, 0, 0.03), 0px 4px 30px 0px rgba(0, 0, 0, 0.03), 0px 0px 8px 0px rgba(0, 0, 0, 0.03)',
+			},
+			borderRadius: {
+				'radius-none': 'var(--radius-none)',
+				'radius-xs': 'var(--radius-xs)',
+				'radius-sm': 'var(--radius-sm)',
+				radius: 'var(--radius)',
+				'radius-md': 'var(--radius-md)',
+				'radius-lg': 'var(--radius-lg)',
+				'radius-full': 'var(--radius-full)',
+			},
+			fontSize: {
+				'tremor-label': [
+					'0.75rem',
+					{
+						lineHeight: '1rem',
+					},
+				],
+				'tremor-default': [
+					'0.875rem',
+					{
+						lineHeight: '1.25rem',
+					},
+				],
+				'tremor-title': [
+					'1.125rem',
+					{
+						lineHeight: '1.75rem',
+					},
+				],
+				'tremor-metric': [
+					'1.875rem',
+					{
+						lineHeight: '2.25rem',
+					},
+				],
+			},
+		},
+	},
+	plugins: [require('tailwindcss-animate')],
+	safelist: [
+		{
+			pattern:
+				/^(bg-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+			variants: ['hover', 'ui-selected'],
+		},
+		{
+			pattern:
+				/^(text-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+			variants: ['hover', 'ui-selected'],
+		},
+		{
+			pattern:
+				/^(border-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+			variants: ['hover', 'ui-selected'],
+		},
+		{
+			pattern:
+				/^(ring-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+		},
+		{
+			pattern:
+				/^(stroke-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+		},
+		{
+			pattern:
+				/^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		...['primary', 'secondary', 'danger'].flatMap((customColor) => [
+			...['lightest', 'lighter', 'light', '', 'dark', 'darker', 'darkest'].flatMap((shade) => [
+				`bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`border-${customColor}${shade ? `-${shade}` : ''}`,
+				`hover:bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`hover:border-${customColor}${shade ? `-${shade}` : ''}`,
+				`hover:text-${customColor}${shade ? `-${shade}` : ''}`,
+				`active:bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`active:border-${customColor}${shade ? `-${shade}` : ''}`,
+				`active:text-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:border-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:hover:bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:hover:border-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:hover:text-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:active:bg-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:active:border-${customColor}${shade ? `-${shade}` : ''}`,
+				`dark:active:text-${customColor}${shade ? `-${shade}` : ''}`,
+				`fill-${customColor}${shade ? `-${shade}` : ''}`,
+				`ring-${customColor}${shade ? `-${shade}` : ''}`,
+				`stroke-${customColor}${shade ? `-${shade}` : ''}`,
+				`text-${customColor}${shade ? `-${shade}` : ''}`,
+				`text-${customColor}-foreground`,
+			]),
+			`fill-${customColor}`,
+			`ring-${customColor}`,
+			`stroke-${customColor}`,
+			`text-${customColor}`,
+			`ui-selected:bg-${customColor}`,
+			`ui-selected:border-${customColor}`,
+			`ui-selected:text-${customColor}`,
+		]),
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+		{
+			pattern:
+				/^(?:bg|bg-on|text|text-on|border|border-on|fill|ring)-(?:primary|neutral|danger)(?:|-sub|-container|-accent|-pressed|-hover)$/,
+			variants: ['hover', 'ui-selected', 'active'],
+		},
+	],
 };
-export default config;

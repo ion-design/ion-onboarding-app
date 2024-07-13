@@ -15,13 +15,9 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<body
-				className={
-					inter.className + 'w-screen h-screen bg-base overflow-y-scroll flex justify-center'
-				}
-			>
-				{children}
+		<html className="h-full">
+			<body className={'flex min-h-full flex-col ' + inter.className}>
+				<main className="grow">{children}</main>
 			</body>
 		</html>
 	);
