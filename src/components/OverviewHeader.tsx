@@ -41,7 +41,7 @@ function OverviewHeader({
       </div>
       <div className="w-full flex-col flex gap-6">
         <div className="w-full flex-col flex gap-3">
-          <Badge emphasis="low" color="grey">
+          <Badge variant="soft" color="grey">
             ION DESIGN SYSTEM
           </Badge>
           <div className="text-6xl leading-[72px] font-medium text-gray-800 max-w-[750px]">
